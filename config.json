@@ -1,0 +1,24 @@
+{
+    "framework": {
+        "version": "0.6.0",
+        "classpath": ["FreshPHP", "Class"],
+        "mvc_route": {
+            "": "Home",
+            "gallery": {
+                "": "Gallery",
+                "[0-9]{5}": {
+                    "": "GalleryAlbum",
+                    "[0-9]": "GalleryImage"
+                }
+            },
+            "about":    "About",
+            "contact":  "ContactForm"
+        },
+        "error_pages": {
+            "404": "/404.php"
+        }
+    },
+    "website": {
+
+    }
+}
