@@ -9,6 +9,6 @@ namespace FreshPHP\Singleton;
  */
 interface ISingleton {
 
-    public function getInstance();
+    public static function getInstance();
 
 } 
