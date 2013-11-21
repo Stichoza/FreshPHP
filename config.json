@@ -1,7 +1,7 @@
 {
     "framework": {
         "version": "0.6.0",
-        "classpath": ["src", "Class"],
+        "classpath": "src",
         "mvc_route": {
             "": "Home",
             "gallery": {
