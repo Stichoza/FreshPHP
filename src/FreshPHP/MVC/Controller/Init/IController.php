@@ -9,6 +9,7 @@ namespace FreshPHP\MVC\Controller\Init;
  */
 interface IController {
 
-    public function main(array $argv);
+    public function main(array $argv = array());
+    // TODO Change with shorter array syntax
 
 } 

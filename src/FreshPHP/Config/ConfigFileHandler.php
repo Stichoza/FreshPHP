@@ -1,6 +1,7 @@
 <?php
 
 namespace FreshPHP\Config;
+
 use FreshPHP\Singleton\ISingleton as Singleton;
 
 /**
@@ -41,7 +42,7 @@ class ConfigFileHandler implements Singleton {
      * Get self instance (Singleton)
      * @return ConfigFileHandler
      */
-    public function getInstance() {
+    public static function getInstance() {
         if(!is_object(self::$instance)) {
             $c = __CLASS__;
             self::$instance = new $c();
