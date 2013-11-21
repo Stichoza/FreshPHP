@@ -3,11 +3,11 @@
 namespace FreshPHP\HTTP;
 
 /**
- * Class HTTPRequest
+ * Class Request
  * @package FreshPHP\HTTP
  * @author Stichoza <me@stichoza.com>
  */
-class HTTPRequest {
+class Request {
 
     protected static $HTTPErrorCodes = array(
         100 => "Continue",
@@ -53,8 +53,7 @@ class HTTPRequest {
         420 => "Enhance Your Calm", // LOL
         422 => "Unprocessable Entity",
         423 => "Locked",
-        424 => "Failed Dependency",
-        424 => "Method Failure",
+        424 => "Failed Dependency", // TODO Check this
         425 => "Unordered Collection",
         426 => "Upgrade Required",
         428 => "Precondition Required",
@@ -88,6 +87,10 @@ class HTTPRequest {
         if (!isset($_REQUEST[$name]))
             return $defaultValue;
         return sprintf($format, $_REQUEST[$name]);
+    }
+
+    public static function getDirArray() {
+        return []; // TODO finnish this
     }
 
 } 
