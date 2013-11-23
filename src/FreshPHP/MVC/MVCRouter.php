@@ -20,13 +20,16 @@ class MVCRouter {
      */
     public static function getController() {
 
-        $routeArray = ConfigFileHandler::getInstance()->getParam("framework", "mvc_route");
+        $config = ConfigFileHandler::getInstance();
+        $mvc = $config->getParam("framework", "mvc");
         $requestArray = Request::getDirArray();
 
         // TODO Route request here (get name of controller)
+        $controllerClassName = "DemoController";
 
         if (Controller\$controllerClassName instanceof IController) {
-            return Controller\$controllerClassName;
+            $cName = "Controller\\" . $controllerClassName;
+            return new $cName();
         } else {
             throw new \Exception("Controller is not implementing interface IController");
         }
