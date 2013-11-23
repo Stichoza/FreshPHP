@@ -1,13 +1,14 @@
 <?php
 
 namespace FreshPHP\HTTP;
+use FreshPHP\Singleton\Singleton;
 
 /**
  * Class Request
  * @package FreshPHP\HTTP
  * @author Stichoza <me@stichoza.com>
  */
-class Request {
+class Request extends Singleton {
 
     protected static $HTTPErrorCodes = array(
         100 => "Continue",
@@ -90,7 +91,7 @@ class Request {
     }
 
     public static function getDirArray() {
-        return []; // TODO finnish this
+        return array(); // TODO shorter
     }
 
 } 

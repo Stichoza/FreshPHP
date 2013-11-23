@@ -2,14 +2,14 @@
 
 namespace FreshPHP\Config;
 
-use FreshPHP\Singleton\ISingleton as Singleton;
+use FreshPHP\Singleton\Singleton;
 
 /**
  * Class ConfigFileHandler
  * @package FreshPHP\Config
  * @author Stichoza <me@stichoza.com>
  */
-class ConfigFileHandler implements Singleton {
+class ConfigFileHandler extends Singleton {
 
     /**
      * Framework configuration filename. Path relative to index file
@@ -22,11 +22,6 @@ class ConfigFileHandler implements Singleton {
     protected $configArray = array();
 
     /**
-     * @var ConfigFileHandler $instance Instance of self
-     */
-    private static $instance;
-
-    /**
      * Class constructor
      * @throws \Exception
      */
@@ -36,18 +31,6 @@ class ConfigFileHandler implements Singleton {
         } elseif (!$this->configArray = json_decode($fileSource, true)) {
             throw new \Exception("Invalid JSON");
         }
-    }
-
-    /**
-     * Get self instance (Singleton)
-     * @return ConfigFileHandler
-     */
-    public static function getInstance() {
-        if(!is_object(self::$instance)) {
-            $c = __CLASS__;
-            self::$instance = new $c();
-        }
-        return self::$instance;
     }
 
     /**
