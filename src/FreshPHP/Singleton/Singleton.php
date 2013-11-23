@@ -22,4 +22,17 @@ abstract class Singleton implements ISingleton {
         return self::$instances[$class];
     }
 
+    /**
+     * Destruct class instance
+     * @param string $className name of the class
+     * @return bool
+     */
+    public static final function destroy($className) {
+        if (isset(self::$instances[$className])) {
+            self::$instances[$className] = null;
+            return true;
+        }
+        return false;
+    }
+
 }
