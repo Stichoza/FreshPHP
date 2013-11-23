@@ -1,6 +1,6 @@
 <?php
 
-namespace FreshPHP;
+namespace FreshPHP\Config;
 
 /**
  * Initial class for getting framework in working state
@@ -9,12 +9,14 @@ namespace FreshPHP;
  */
 class Igniter {
 
+    const CLASSPATH = "src";
+
     public function __construct() {
         spl_autoload_register(__NAMESPACE__ . '\Igniter::classAutoload');
     }
 
     public static function classAutoload($className) {
-        $filename = "src";
+        $filename = self::CLASSPATH;
         foreach (explode("\\", $className) as $part) {
             $filename .= "/" . $part;
         }
