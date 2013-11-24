@@ -28,9 +28,8 @@ class MVCRouter {
         // TODO Route request here (get name of controller)
         $controllerClassName = "DemoController";
 
-        $controllerReflection = new \ReflectionClass("Controller\\" . $controllerClassName);
-
-        if ($controllerReflection->implementsInterface("IController")) {
+        $controllerReflection = new \ReflectionClass(__NAMESPACE__ . "\\Controller\\" . $controllerClassName);
+        if ($controllerReflection->implementsInterface(__NAMESPACE__ . "\\Controller\\Init\\IController")) {
             return $controllerReflection->newInstance($args);
         } else {
             throw new \Exception("Controller is not implementing interface IController");
