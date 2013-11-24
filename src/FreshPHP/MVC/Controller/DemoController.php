@@ -13,7 +13,14 @@ use FreshPHP\MVC\Controller\Init\IController;
 class DemoController extends AbstractController implements IController {
 
     #Implement
-    public function main(array $argv) {
+    public function __construct() {
+        $this->model = null;
+        $this->view = null;
+    }
+
+    #Implement
+    public function main(array $argv = array()) {
+        echo "DemoController::main() YOLO!";
         // Controller entry point
     }
 
