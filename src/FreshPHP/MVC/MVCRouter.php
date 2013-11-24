@@ -4,7 +4,6 @@ namespace FreshPHP\MVC;
 
 use FreshPHP\Config\ConfigFileHandler;
 use FreshPHP\HTTP\Request;
-use FreshPHP\MVC\Controller\Init\IController;
 
 /**
  * Class MVCRouter
