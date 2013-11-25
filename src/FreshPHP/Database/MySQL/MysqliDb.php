@@ -24,7 +24,7 @@ class MysqliDb
     /**
      * MySQLi instance
      *
-     * @var mysqli
+     * @var \mysqli
      */
     protected $_mysqli;
     /**
@@ -70,7 +70,7 @@ class MysqliDb
         if($port == NULL)
             $port = ini_get('mysqli.default_port');
         
-        $this->_mysqli = new mysqli($host, $username, $password, $db, $port)
+        $this->_mysqli = new \mysqli($host, $username, $password, $db, $port)
             or die('There was a problem connecting to the database');
 
         $this->_mysqli->set_charset('utf8');
@@ -306,7 +306,7 @@ class MysqliDb
      * @param int   $numRows   The number of rows total to return.
      * @param array $tableData Should contain an array of data for updating the database.
      *
-     * @return mysqli_stmt Returns the $stmt object.
+     * @return \mysqli_stmt Returns the $stmt object.
      */
     protected function _buildQuery($numRows = null, $tableData = null)
     {
@@ -406,11 +406,11 @@ class MysqliDb
      * This helper method takes care of prepared statements' "bind_result method
      * , when the number of variables to pass is unknown.
      *
-     * @param mysqli_stmt $stmt Equal to the prepared statement object.
+     * @param \mysqli_stmt $stmt Equal to the prepared statement object.
      *
      * @return array The results of the SQL fetch.
      */
-    protected function _dynamicBindResults(mysqli_stmt $stmt)
+    protected function _dynamicBindResults(\mysqli_stmt $stmt)
     {
         $parameters = array();
         $results = array();
@@ -439,7 +439,7 @@ class MysqliDb
      * Method attempts to prepare the SQL query
      * and throws an error if there was a problem.
      *
-     * @return mysqli_stmt
+     * @return \mysqli_stmt
      */
     protected function _prepareQuery()
     {
