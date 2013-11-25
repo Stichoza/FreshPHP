@@ -7,12 +7,12 @@ namespace FreshPHP\Config;
  * @package FreshPHP
  * @author Stichoza <me@stichoza.com>
  */
-class Igniter {
+class ClassAutoloader {
 
     const CLASSPATH = "src";
 
-    public function __construct() {
-        spl_autoload_register(__NAMESPACE__ . '\Igniter::classAutoload');
+    public static function register() {
+        spl_autoload_register(__NAMESPACE__ . '\\ClassAutoloader::classAutoload');
     }
 
     public static function classAutoload($className) {
