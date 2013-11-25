@@ -1,17 +1,20 @@
 {
     "framework": {
         "version": "0.6.0",
-        "mvc_route": {
-            "": "Home",
-            "gallery": {
-                "": "Gallery",
-                "/[0-9]/": {
-                    "": "GalleryAlbum",
-                    "/[0-9]/": "GalleryImage"
-                }
-            },
-            "about":    "About",
-            "contact":  "ContactForm"
+        "mvc": {
+            "start_index": 0,
+            "route": {
+                ".": "Home",
+                "gallery": {
+                    ".": "Gallery",
+                    "/[0-9]/": {
+                        ".": "GalleryAlbum",
+                        "/[0-9]/": "GalleryImage"
+                    }
+                },
+                "about":    "About",
+                "contact":  "ContactForm"
+            }
         },
         "error_pages": {
             "404": "/404.php"
