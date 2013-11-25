@@ -1,6 +1,7 @@
 <?php
 
 namespace FreshPHP\MVC\Model\Init;
+use FreshPHP\Database\MySQL\MysqliDb;
 
 /**
  * Class AbstractModel
@@ -9,4 +10,13 @@ namespace FreshPHP\MVC\Model\Init;
  */
 abstract class AbstractModel {
 
+    protected $sql;
+
+    public function __construct() {
+        $this->openConnection();
+    }
+
+    public final function openConnection() {
+        $this->sql = new MysqliDb(); // TODO add data to constructor
+    }
 } 
