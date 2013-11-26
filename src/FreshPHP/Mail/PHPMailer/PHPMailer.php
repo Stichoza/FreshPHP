@@ -19,6 +19,7 @@
  */
 
 namespace FreshPHP\Mail\PHPMailer;
+use FreshPHP\Mail\PHPMailer\Exception\PHPMailerException;
 
 /**
  * PHPMailer - PHP email creation and transport class.
@@ -753,7 +754,7 @@ class PHPMailer
         if (!preg_match('/^(to|cc|bcc|Reply-To)$/', $kind)) {
             $this->setError($this->lang('Invalid recipient array') . ': ' . $kind);
             if ($this->exceptions) {
-                throw new phpmailerException('Invalid recipient array: ' . $kind);
+                throw new PHPMailerException('Invalid recipient array: ' . $kind);
             }
             $this->edebug($this->lang('Invalid recipient array') . ': ' . $kind);
             return false;
@@ -2169,22 +2170,24 @@ class PHPMailer
             $magic_quotes = get_magic_quotes_runtime();
             if ($magic_quotes) {
                 if (version_compare(PHP_VERSION, '5.3.0', '<')) {
-                    set_magic_quotes_runtime(0);
+                    set_magic_quotes_runtime(0); // DEPRECATED
                 } else {
                     ini_set('magic_quotes_runtime', 0);
+                    // This feature has been DEPRECATED as of PHP 5.3.0 and REMOVED as of PHP 5.4.0.
                 }
             }
             $file_buffer = file_get_contents($path);
             $file_buffer = $this->encodeString($file_buffer, $encoding);
             if ($magic_quotes) {
                 if (version_compare(PHP_VERSION, '5.3.0', '<')) {
-                    set_magic_quotes_runtime($magic_quotes);
+                    set_magic_quotes_runtime($magic_quotes); // DEPRECATED
                 } else {
                     ini_set('magic_quotes_runtime', $magic_quotes);
+                    // This feature has been DEPRECATED as of PHP 5.3.0 and REMOVED as of PHP 5.4.0.
                 }
             }
             return $file_buffer;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->setError($e->getMessage());
             return '';
         }
@@ -3059,7 +3062,7 @@ class PHPMailer
             } else {
                 throw new phpmailerException($this->lang('variable_set') . $name, self::STOP_CRITICAL);
             }
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $this->setError($e->getMessage());
             if ($e->getCode() == self::STOP_CRITICAL) {
                 return false;
