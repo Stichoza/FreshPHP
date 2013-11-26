@@ -84,14 +84,46 @@ class Request extends Singleton {
         598 => "Network read timeout error",
         599 => "Network connect timeout error");
 
+    /**
+     * @var Directory array, set by Request::getDirArray()
+     */
+    private static $dirArray = null;
+
+    /**
+     * @param string $name Index name in $_REQUEST array
+     * @param string $format C-syntax format identifier
+     * @param null $defaultValue Default return value
+     * @return null|string Formatted value
+     */
     public static function getVariable($name, $format = "%s", $defaultValue = null) {
         if (!isset($_REQUEST[$name]))
             return $defaultValue;
         return sprintf($format, $_REQUEST[$name]);
     }
 
+    /**
+     * Get the array of request URI directories
+     * @return array Array of directories
+     */
     public static function getDirArray() {
-        return array(); // TODO shorter
+        if (!isset(self::$dirArray)) {
+            self::$dirArray = explode("/", strtok($_SERVER["REQUEST_URI"], "?"));
+        }
+        return self::$dirArray;
     }
+
+    /**
+     * @param int $index Index of request URI direcroty
+     * @return mixed
+     * @throws \OutOfBoundsException
+     */
+    public static function getDir($index = 0) {
+        if ($index > count(self::getDirArray()) || $index < 0) {
+            throw new \OutOfBoundsException("Array index out of bounds");
+        }
+        return self::$dirArray[$index];
+    }
+
+
 
 } 
