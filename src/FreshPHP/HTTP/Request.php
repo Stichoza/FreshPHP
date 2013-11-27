@@ -85,7 +85,7 @@ class Request extends Singleton {
         599 => "Network connect timeout error");
 
     /**
-     * @var Directory array, set by Request::getDirArray()
+     * @var array Directory array, set by Request::getDirArray()
      */
     private static $dirArray = null;
 
@@ -104,9 +104,12 @@ class Request extends Singleton {
     /**
      * Get the array of request URI directories
      * @return array Array of directories
+     * @throws \Exception
      */
     public static function getDirArray() {
         if (!isset(self::$dirArray)) {
+            if (!isset($_SERVER["REQUEST_URI"]))
+                throw new \Exception("Server variable REQUEST_URI not set");
             self::$dirArray = explode("/", strtok($_SERVER["REQUEST_URI"], "?"));
         }
         return self::$dirArray;
