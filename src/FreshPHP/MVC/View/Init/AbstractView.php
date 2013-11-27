@@ -11,6 +11,8 @@ use FreshPHP\View\Init\ViewParameterStorage as V;
  */
 abstract class AbstractView {
 
+    abstract public function render();
+
     public function setParam($key, $value) {
         try {
             V::set($key, $value);
