@@ -1,6 +1,6 @@
 <?php
 
-namespace FreshPHP\View\Init;
+namespace FreshPHP\MVC\View\Init;
 
 use FreshPHP\View\Init\ViewParameterStorage as V;
 
