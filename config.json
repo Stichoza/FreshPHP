@@ -20,6 +20,16 @@
             "404": "/404.php"
         }
     },
+    "api": {
+        "service_1": {
+            "key": "API-KEY-HERE",
+            "sec": "API-SEC-HERE"
+        },
+        "service_2": {
+            "key": "API-KEY-HERE",
+            "sec": "API-SEC-HERE"
+        }
+    },
     "website": {
 
     }
