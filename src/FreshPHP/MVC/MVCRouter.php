@@ -39,7 +39,7 @@ class MVCRouter {
                 $controllerClassName = $routePath["."];
                 break;
             } else if (!isset($routePath[$requestArray[$i]])) {
-                throw new UndefinedControllerException();
+                throw new UndefinedControllerException("Controller for this request is not defined");
             } else if (!isset($requestArray[$i+1])
                 || empty($requestArray[$i+1])) {
                 if (!is_array($routePath[$requestArray[$i]])
@@ -48,7 +48,7 @@ class MVCRouter {
                 } else if (isset($routePath[$requestArray[$i]]["."])) {
                     $controllerClassName = $routePath[$requestArray[$i]]["."];
                 } else {
-                    throw new NoIndexRouteException();
+                    throw new NoIndexRouteException("Route has no index controller defined");
                 }
                 break;
             } else {
