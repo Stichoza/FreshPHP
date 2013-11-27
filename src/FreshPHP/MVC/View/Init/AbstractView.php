@@ -2,8 +2,6 @@
 
 namespace FreshPHP\MVC\View\Init;
 
-use FreshPHP\MVC\View\Init\ViewParameterStorage as V;
-
 /**
  * Class AbstractView
  * @package FreshPHP\MVC\View\Init
@@ -15,14 +13,14 @@ abstract class AbstractView {
 
     public function setParam($key, $value) {
         try {
-            V::set($key, $value);
+            ViewParameterStorage::set($key, $value);
         } catch (\Exception $e) {
             throw $e;
         }
     }
 
     public function getParam($key, $default = null) {
-        return V::get($key, $default);
+        return ViewParameterStorage::get($key, $default);
     }
 
     public function loadFile($filename) {
