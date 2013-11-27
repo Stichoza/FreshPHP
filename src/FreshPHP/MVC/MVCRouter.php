@@ -44,7 +44,10 @@ class MVCRouter {
                 throw new UndefinedControllerException();
             } else if (!isset($requestArray[$i+1])
                 || empty($requestArray[$i+1])) {
-                if (isset($routePath[$requestArray[$i]]["."])) {
+                if (!is_array($routePath[$requestArray[$i]])
+                    && !empty($routePath[$requestArray[$i]])) {
+                    $controllerClassName = $routePath[$requestArray[$i]];
+                } else if (isset($routePath[$requestArray[$i]]["."])) {
                     $controllerClassName = $routePath[$requestArray[$i]]["."];
                 } else {
                     throw new NoIndexRouteException();
@@ -53,9 +56,7 @@ class MVCRouter {
             } else {
                 $routePath = $routePath[$requestArray[$i]];
             }
-        } // TODO Check this
-
-        return $controllerClassName;
+        }
 
         $controllerReflection = new \ReflectionClass(__NAMESPACE__ . "\\Controller\\" . $controllerClassName);
         if ($controllerReflection->implementsInterface(__NAMESPACE__ . "\\Controller\\Init\\IController")) {
