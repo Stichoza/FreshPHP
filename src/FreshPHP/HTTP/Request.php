@@ -102,6 +102,16 @@ class Request extends Singleton {
     }
 
     /**
+     * Get test message of HTTP error code
+     * @param int $errorCode HTTP Error Code
+     * @return string Error status string
+     */
+    public static function getErrorMessage($errorCode) {
+        return (isset(self::$HTTPErrorCodes[$errorCode])) ? self::$HTTPErrorCodes[$errorCode] :
+            "Unknown Error";
+    }
+
+    /**
      * Get the array of request URI directories
      * @return array Array of directories
      * @throws \Exception
@@ -117,16 +127,32 @@ class Request extends Singleton {
 
     /**
      * @param int $index Index of request URI direcroty
-     * @return mixed
+     * @param boolean $exceptions Throw exceptions
+     * @return string
      * @throws \OutOfBoundsException
      */
-    public static function getDir($index = 0) {
+    public static function getDir($index = 0, $exceptions = false) {
         if ($index > count(self::getDirArray()) || $index < 0) {
-            throw new \OutOfBoundsException("Array index out of bounds");
+            if ($exceptions)
+                throw new \OutOfBoundsException("Array index out of bounds");
+            return "";
         }
         return self::$dirArray[$index];
     }
 
-
+    /**
+     * Send HTTP error header
+     * @param int $code HTTP Error code
+     */
+    public static function setErrorCode($code = 404) {
+        ob_clean();
+        if (function_exists('http_response_code')) {
+            http_response_code($code);
+        } else {
+            $protocol = (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] :
+                'HTTP/1.0');
+            header($protocol . ' ' . $code . ' ' . self::getErrorMessage($code));
+        }
+    }
 
 } 
