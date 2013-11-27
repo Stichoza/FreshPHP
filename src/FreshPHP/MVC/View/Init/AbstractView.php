@@ -2,11 +2,11 @@
 
 namespace FreshPHP\MVC\View\Init;
 
-use FreshPHP\View\Init\ViewParameterStorage as V;
+use FreshPHP\MVC\View\Init\ViewParameterStorage as V;
 
 /**
  * Class AbstractView
- * @package FreshPHP\View\Init
+ * @package FreshPHP\MVC\View\Init
  * @author Stichoza <me@stichoza.com>
  */
 abstract class AbstractView {
