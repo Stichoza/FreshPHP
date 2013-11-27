@@ -2,6 +2,7 @@
 
 namespace FreshPHP\MVC\Model\Init;
 use FreshPHP\Database\MySQL\MysqliDb;
+use FreshPHP\Database\CredentialStorage as CS;
 
 /**
  * Class AbstractModel
@@ -17,6 +18,10 @@ abstract class AbstractModel {
     }
 
     public final function openConnection() {
-        $this->sql = new MysqliDb(); // TODO add data to constructor
+        $this->sql = new MysqliDb(
+            CS::DB_HOST,
+            CS::DB_USER,
+            CS::DB_PASS,
+            CS::DB_NAME);
     }
 } 
