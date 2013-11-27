@@ -29,8 +29,6 @@ class MVCRouter {
         $mvc = $config->getParam("framework", "mvc");
         $requestArray = Request::getDirArray();
 
-        $requestArray = $args;
-
         $routePath = $mvc["route"];
         $controllerClassName = null;
 
