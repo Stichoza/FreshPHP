@@ -1,10 +1,10 @@
 <?php
 
-namespace FreshPHP\View\Init;
+namespace FreshPHP\MVC\View\Init;
 
 /**
  * Class ViewParameterStorage
- * @package FreshPHP\View\Init
+ * @package FreshPHP\MVC\View\Init
  * @author Stichoza <me@stichoza.com>
  */
 class ViewParameterStorage {
