@@ -14,7 +14,7 @@ class ConfigFileHandler extends Singleton {
     /**
      * Framework configuration filename. Path relative to index file
      */
-    const CONFIG_FILE = "config.json";
+    const CONFIG_FILE = "config/config.json";
 
     /**
      * @var array $configArray Array containing configuration file data
