@@ -1,15 +1,19 @@
 <?php
 require_once "src/FreshPHP/Config/ClassAutoloader.php";
 
-use FreshPHP\HTTP\Request;
 use FreshPHP\MVC\MVCRouter;
+use FreshPHP\Config\ClassAutoloader;
 
-FreshPHP\Config\ClassAutoloader::register() || die("Cannot register autoloader");
+ClassAutoloader::register() || die("Cannot register autoloader");
+
+$_SERVER["REQUEST_URI"] = "demo"; //
 
 try {
     MVCRouter::getController()->main();
 } catch (Exception $e) {
-    trigger_error(get_class($e), E_USER_ERROR);
+    $exceptionMessage = $e->getMessage();
+    trigger_error(get_class($e) . ((empty($exceptionMessage))
+        ? "" : " - " . $exceptionMessage), E_USER_ERROR);
 }
 
 exit();
