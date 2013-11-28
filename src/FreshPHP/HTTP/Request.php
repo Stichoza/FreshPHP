@@ -120,7 +120,7 @@ class Request extends Singleton {
         if (!isset(self::$dirArray)) {
             if (!isset($_SERVER["REQUEST_URI"]))
                 throw new \Exception("Server variable REQUEST_URI not set");
-            self::$dirArray = explode("/", strtok($_SERVER["REQUEST_URI"], "?"));
+            self::$dirArray = explode("/", trim(strtok($_SERVER["REQUEST_URI"], "/"), "?"));
         }
         return self::$dirArray;
     }
