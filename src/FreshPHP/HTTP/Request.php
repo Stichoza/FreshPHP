@@ -90,15 +90,86 @@ class Request extends Singleton {
     private static $dirArray = null;
 
     /**
-     * @param string $name Index name in $_REQUEST array
+     * @param array $array
+     * @param $key
+     * @param string $format
+     * @param null $defaultValue
+     * @return null|string
+     */
+    private static function getValueFromArray(array $array, $key, $format = "%s", $defaultValue = null) {
+        if (!isset($array[$key]))
+            return $defaultValue;
+        return sprintf($format, $array[$key]);
+    }
+
+    /**
+     * @param string $key Index name in $_REQUEST array
      * @param string $format C-syntax format identifier
      * @param null $defaultValue Default return value
      * @return null|string Formatted value
      */
-    public static function getVariable($name, $format = "%s", $defaultValue = null) {
-        if (!isset($_REQUEST[$name]))
-            return $defaultValue;
-        return sprintf($format, $_REQUEST[$name]);
+    public static function getVariable($key, $format = "%s", $defaultValue = null) {
+        return self::getValueFromArray($_REQUEST, $key, $format, $defaultValue);
+    }
+
+    /**
+     * @param string $key Index name in $_GET array
+     * @param string $format C-syntax format identifier
+     * @param null $defaultValue Default return value
+     * @return null|string Formatted value
+     */
+    public static function getGetVar($key, $format = "%s", $defaultValue = null) {
+        return self::getValueFromArray($_GET, $key, $format, $defaultValue);
+    }
+
+    /**
+     * @param string $key Index name in $_POST array
+     * @param string $format C-syntax format identifier
+     * @param null $defaultValue Default return value
+     * @return null|string Formatted value
+     */
+    public static function getPostVar($key, $format = "%s", $defaultValue = null) {
+        return self::getValueFromArray($_POST, $key, $format, $defaultValue);
+    }
+
+    /**
+     * @param string $key Index name in $_SESSION array
+     * @param string $format C-syntax format identifier
+     * @param null $defaultValue Default return value
+     * @return null|string Formatted value
+     */
+    public static function getSessionVar($key, $format = "%s", $defaultValue = null) {
+        return self::getValueFromArray($_SESSION, $key, $format, $defaultValue);
+    }
+
+    /**
+     * @param string $key Index key in $_SESSION array
+     * @param string $value Value of session variable
+     * @return boolean True is set successfully
+     */
+    public static function setSessionVar($key, $value) {
+        if (is_array($_SESSION)) {
+            $_SESSION[$key] = $value;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param string $key Index name in $_COOKIE array
+     * @param string $format C-syntax format identifier
+     * @param null $defaultValue Default return value
+     * @return null|string Formatted value
+     */
+    public static function getCookie($key, $format = "%s", $defaultValue = null) {
+        return self::getValueFromArray($_COOKIE, $key, $format, $defaultValue);
+    }
+
+    /**
+     * 
+     */
+    public static function setCookie() {
+        // TODO implement setCookie()
     }
 
     /**
