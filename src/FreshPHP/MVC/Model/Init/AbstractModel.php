@@ -11,6 +11,9 @@ use FreshPHP\Database\CredentialStorage as CS;
  */
 abstract class AbstractModel {
 
+    /**
+     * @var MysqliDb database wrapper instance
+     */
     protected $sql;
 
     public function __construct() {
