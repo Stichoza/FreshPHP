@@ -9,8 +9,8 @@ use FreshPHP\MVC\Exception\UndefinedControllerException;
 use FreshPHP\MVC\Controller\ErrorController;
 
 session_start();
-
 ClassAutoloader::register() || die("Cannot register autoloader");
+error_reporting((Request::getVariable("debug")) ? E_ALL : 0);
 
 try {
     MVCRouter::getController()->main();
