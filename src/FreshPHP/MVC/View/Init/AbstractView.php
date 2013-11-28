@@ -24,9 +24,12 @@ abstract class AbstractView {
     }
 
     public function loadFile($filename) {
-        class_alias("FreshPHP\\MVC\\View\\Init\\ViewParameterStorage", "V");
-        class_alias("FreshPHP\\Config\\LocaleTransfer", "L");
-        class_alias("FreshPHP\\HTTP\\Request", "R");
+        if (!class_exists("V", false))
+            class_alias("FreshPHP\\MVC\\View\\Init\\ViewParameterStorage", "V");
+        if (!class_exists("L", false))
+            class_alias("FreshPHP\\Config\\LocaleTransfer", "L");
+        if (!class_exists("R", false))
+            class_alias("FreshPHP\\HTTP\\Request", "R");
         include "res/html/" . $filename; // TODO output contents of non-php files
     }
 
