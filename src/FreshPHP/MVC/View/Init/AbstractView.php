@@ -24,6 +24,7 @@ abstract class AbstractView {
     }
 
     public function loadFile($filename) {
+        class_alias("FreshPHP\\MVC\\View\\Init\\ViewParameterStorage", "V");
         include "res/html/" . $filename; // TODO output contents of non-php files
     }
 
