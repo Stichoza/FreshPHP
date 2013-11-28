@@ -20,16 +20,23 @@ class LocaleStringHandler {
     private $localeData = array();
 
     /**
+     * @var string Language code
+     */
+    private $langCode = null;
+
+    /**
      * @param string $locale Locale id (filename without extension)
      * @throws \Exception
      */
     public function __construct($locale) {
+        $locale = strtolower($locale);
         $filename = self::LOCALE_DIRECTORY . $locale . ".json";
         if (!$fileSource = file_get_contents($filename)) {
             throw new \Exception("Error reading locale file");
         } elseif (!$this->localeData = json_decode($fileSource, true)) {
             throw new \Exception("Invalid JSON");
         }
+        $this->langCode = $locale;
     }
 
     /**
@@ -46,6 +53,14 @@ class LocaleStringHandler {
             $param = $param[$arg];
         }
         return $param;
+    }
+
+    /**
+     * Get language code
+     * @return string Language code
+     */
+    public function getLocale() {
+        return $this->langCode;
     }
 
 } 

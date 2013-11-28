@@ -42,4 +42,12 @@ class LocaleTransfer {
         return $string;
     }
 
+    /**
+     * Get language code
+     * @return string Language code
+     */
+    public static function getLang() {
+        return self::getLang();
+    }
+
 } 
