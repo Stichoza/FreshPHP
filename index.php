@@ -2,6 +2,8 @@
 require_once "src/FreshPHP/Config/ClassAutoloader.php";
 
 use FreshPHP\Config\ClassAutoloader;
+use FreshPHP\Config\ConfigFileHandler;
+use FreshPHP\Config\LocaleTransfer;
 use FreshPHP\HTTP\Request;
 use FreshPHP\MVC\MVCRouter;
 use FreshPHP\MVC\Exception\NoIndexRouteException;
@@ -13,6 +15,11 @@ ClassAutoloader::register() || die("Cannot register autoloader");
 error_reporting((Request::getVariable("debug")) ? E_ALL : 0);
 
 try {
+    LocaleTransfer::setLocale(
+        Request::getDir(
+            (int) ConfigFileHandler::getInstance()->getParam("framework", "mvc", "locale_index")
+        )
+    );
     MVCRouter::getController()->main();
 } catch (Exception $e) {
     if ($e instanceof NoIndexRouteException || $e instanceof UndefinedControllerException) {
