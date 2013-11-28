@@ -155,4 +155,13 @@ class Request extends Singleton {
         }
     }
 
+    /**
+     * Redirect user to an URL
+     * @param $url
+     */
+    public static function redirect($url) {
+        ob_clean();
+        header("location: " . $url);
+    }
+
 } 
