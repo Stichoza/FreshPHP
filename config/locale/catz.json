@@ -1,0 +1,8 @@
+{
+    "sitename": "FreshPHP Nyan",
+    "menu": {
+        "home":     "Me wantz home",
+        "about":    "Feed me",
+        "contact":  "I needs talk :3"
+    }
+}

@@ -1,4 +1,8 @@
 {
-    "home":     "Home",
-    "about":    "About us"
+    "sitename": "FreshPHP Demo",
+    "menu": {
+        "home":     "Home",
+        "about":    "About",
+        "contact":  "Contact"
+    }
 }
