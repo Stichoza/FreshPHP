@@ -5,6 +5,7 @@ namespace FreshPHP\MVC\Controller;
 use FreshPHP\HTTP\Request;
 use FreshPHP\MVC\Controller\Init\AbstractController;
 use FreshPHP\MVC\Controller\Init\IController;
+use FreshPHP\MVC\View\ErrorView;
 
 /**
  * Class ErrorController
@@ -20,7 +21,7 @@ class ErrorController extends AbstractController implements IController {
     #Implement
     public function __construct() {
         $this->model = null;
-        $this->view = null;
+        $this->view = new ErrorView();
     }
 
     #Implement
@@ -40,7 +41,7 @@ class ErrorController extends AbstractController implements IController {
         $this->view->setParam("error_code", $this->errorCode);
         $this->view->setParam("error_message", Request::getErrorMessage($this->errorCode));
         $this->view->setParam("monkey_script", self::monkeyHash($this->errorData));
-        $this->view->renderPage();
+        $this->view->render();
     }
 
     public static final function monkeyHash(array $associativeArray) {
