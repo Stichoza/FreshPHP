@@ -4,6 +4,8 @@ namespace FreshPHP\MVC\Controller;
 
 use FreshPHP\MVC\Controller\Init\AbstractController;
 use FreshPHP\MVC\Controller\Init\IController;
+use FreshPHP\MVC\Model\DemoModel;
+use FreshPHP\MVC\View\DemoView;
 
 /**
  * Class DemoController
@@ -14,14 +16,16 @@ class DemoController extends AbstractController implements IController {
 
     #Implement
     public function __construct() {
-        $this->model = null;
-        $this->view = null;
+        $this->model = new DemoModel();
+        $this->view = new DemoView();
     }
 
     #Implement
     public function main(array $argv = array()) {
-        echo "DemoController::main() YOLO!";
         // Controller entry point
+        $foo = $this->model->getPageContent();
+        $this->view->setParam("content", $foo);
+        $this->view->render();
     }
 
 }

@@ -1,19 +1,20 @@
 {
     "framework": {
-        "version": "0.6.0",
+        "version": "0.6.3",
         "mvc": {
             "start_index": 0,
             "route": {
                 ".": "Home",
+                "demo": "DemoController",
                 "gallery": {
-                    ".": "Gallery",
+                    ".": "GalleryController",
                     "/[0-9]/": {
-                        ".": "GalleryAlbum",
-                        "/[0-9]/": "GalleryImage"
+                        ".": "GalleryAlbumController",
+                        "/[0-9]/": "GalleryImageController"
                     }
                 },
-                "about":    "About",
-                "contact":  "ContactForm"
+                "about":    "AboutController",
+                "contact":  "ContactFormController"
             }
         },
         "error_pages": {
