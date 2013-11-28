@@ -15,12 +15,12 @@ ClassAutoloader::register() || die("Cannot register autoloader");
 error_reporting((Request::getVariable("debug")) ? E_ALL : 0);
 
 $lDir = (int) ConfigFileHandler::getInstance()->getParam("framework", "mvc", "locale_index");
-if ($lDir >= 0 && Request::getDir($lDir) == "" || Request::getDir($lDir) == null) {
-    $newReqDir = Request::getDirArray();
-    $newReqDir[$lDir] = isset($_SESSION["locale"])
-        ? $_SESSION["locale"]
-        : ConfigFileHandler::getInstance()->getParam("framework", "mvc", "default_locale");
-    Request::redirect(implode("/", $newReqDir)); // TODO fix lDir>1 bug
+if ($lDir >= 0 && (Request::getDir($lDir) == "" || Request::getDir($lDir) == null)) {
+    Request::redirect(
+        (Request::getSessionVar("locale", "%s", false))
+            ? ConfigFileHandler::getInstance()->getParam("framework", "mvc", "default_locale")
+            : Request::getSessionVar("locale")
+    );
 }
 
 try {
