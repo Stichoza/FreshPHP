@@ -46,8 +46,8 @@ class LocaleTransfer {
      * Get language code
      * @return string Language code
      */
-    public static function getLang() {
-        return self::$lsh->getLang();
+    public static function getLocale() {
+        return self::$lsh->getLocale();
     }
 
 } 
