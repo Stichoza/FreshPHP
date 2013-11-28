@@ -33,4 +33,11 @@ abstract class AbstractView {
         include "res/html/" . $filename; // TODO output contents of non-php files
     }
 
+    /*
+     * TODO implement addScript(name, loadInHead, async)
+     * TODO implement addStyle(name, media)
+     * TODO implement addTitle(title)
+     * TODO implement rest shit
+     */
+
 } 
