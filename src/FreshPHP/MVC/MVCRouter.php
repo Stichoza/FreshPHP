@@ -32,7 +32,7 @@ class MVCRouter {
         $routePath = $mvc["route"];
         $controllerClassName = null;
 
-        for ($i = $mvc["start_index"]; $i < count($requestArray); $i++) {
+        for ($i = intval($mvc["start_index"]); $i < count($requestArray); $i++) {
             if ($i == $mvc["start_index"]
                 && isset($requestArray[$i])
                 && empty($requestArray[$i])) {
