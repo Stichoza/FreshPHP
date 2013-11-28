@@ -22,20 +22,23 @@ try {
     );
     MVCRouter::getController()->main();
 } catch (Exception $e) {
-    if ($e instanceof NoIndexRouteException || $e instanceof UndefinedControllerException) {
-        $errorController = new ErrorController();
-        $errorController->main(array(
-            "code" => ((int) Request::getVariable("_http_error_code") > 0)
-                    ? (int) Request::getVariable("_http_error_code") : 404,
-            "data" => array(
-                "exception" => get_class($e),
-                "message" => $e->getMessage()
-            )
-        ));
-    } else {
-        $exceptionMessage = $e->getMessage();
-        trigger_error(get_class($e) . ((empty($exceptionMessage))
-                ? "" : " - " . $exceptionMessage), E_USER_ERROR);
+    $errorController = new ErrorController();
+    $errorData = array();
+    $exception = explode("\\", get_class($e));
+    switch ($exception[count($exception)-1]) {
+        case "NoIndexRouteException":
+        case "UndefinedControllerException":
+            $errorData["code"] = 404;
+            break;
+        case "Exception":
+        default:
+            $errorData["code"] = 400;
+            break;
     }
+    $errorData["data"] = array(
+        "exception" => get_class($e),
+        "message" => $e->getMessage()
+    );
+    $errorController->main($errorData);
 }
 exit;
