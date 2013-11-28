@@ -2,14 +2,12 @@
 
 namespace FreshPHP\Config;
 
-use FreshPHP\Singleton\Singleton;
-
 /**
  * Class LocaleStringHandler
  * @package FreshPHP\Config
  * @author Stichoza <me@stichoza.com>
  */
-class LocaleStringHandler extends Singleton {
+class LocaleStringHandler {
 
     /**
      * Locale files directory with trailing slash
@@ -32,6 +30,22 @@ class LocaleStringHandler extends Singleton {
         } elseif (!$this->localeData = json_decode($fileSource, true)) {
             throw new \Exception("Invalid JSON");
         }
+    }
+
+    /**
+     * @param array $stringRoute
+     * @throws \BadFunctionCallException
+     * @throws \OutOfBoundsException
+     * @return string
+     */
+    public function getString(array $stringRoute) {
+        $param = $this->localeData;
+        foreach ($stringRoute as $arg) {
+            if (!isset($param[$arg]))
+                throw new \OutOfBoundsException("Array key not found");
+            $param = $param[$arg];
+        }
+        return $param;
     }
 
 } 
