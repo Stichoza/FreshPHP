@@ -16,6 +16,7 @@ class LocaleTransfer {
      * @return bool
      */
     public static function setLocale($locale) {
+        $localeLoaded = false;
         try {
             self::$lsh = new LocaleTransfer($locale);
         } catch (\Exception $e) {
