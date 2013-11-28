@@ -1,10 +1,10 @@
 {
     "framework": {
-        "version": "0.6.3",
+        "version": "0.6.5",
         "mvc": {
             "start_index": 0,
             "route": {
-                ".": "Home",
+                ".": "HomeController",
                 "demo": "DemoController",
                 "gallery": {
                     ".": "GalleryController",
@@ -16,9 +16,6 @@
                 "about":    "AboutController",
                 "contact":  "ContactFormController"
             }
-        },
-        "error_pages": {
-            "404": "/404.php"
         }
     },
     "api": {
@@ -32,6 +29,9 @@
         }
     },
     "website": {
-
+        "default_static_content": {
+            "css": [],
+            "js": []
+        }
     }
 }
