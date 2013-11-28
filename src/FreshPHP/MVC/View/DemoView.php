@@ -8,7 +8,7 @@ class DemoView extends AbstractView {
 
     public function render() {
         $this->loadFile("components/head.php");
-        $this->loadFile("demo.html");
+        $this->loadFile("demo.php");
         $this->loadFile("components/foot.php");
     }
 
