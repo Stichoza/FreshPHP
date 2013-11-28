@@ -13,16 +13,16 @@ class LocaleTransfer {
     /**
      * Set locale
      * @param $locale
+     * @throws \Exception
      * @return bool
      */
     public static function setLocale($locale) {
-        $localeLoaded = false;
         try {
-            self::$lsh = new LocaleTransfer($locale);
+            self::$lsh = new LocaleStringHandler($locale);
         } catch (\Exception $e) {
-            $localeLoaded = true;
+            throw $e;
         }
-        return !!$localeLoaded;
+        return true;
     }
 
     /**
