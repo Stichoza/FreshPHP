@@ -1,5 +1,5 @@
 {
-    "name": "Stichoza/FreshPHP",
+    "name": "stichoza/freshphp",
     "type": "framework",
     "description": "Fresh PHP MVC framework",
     "keywords": ["php","mvc", "framework"],
