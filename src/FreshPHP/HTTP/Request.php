@@ -166,7 +166,7 @@ class Request extends Singleton {
     }
 
     /**
-     * 
+     *
      */
     public static function setCookie() {
         // TODO implement setCookie()
@@ -233,6 +233,7 @@ class Request extends Singleton {
     public static function redirect($url) {
         ob_clean();
         header("location: " . $url);
+        exit();
     }
 
 } 

@@ -6,8 +6,6 @@ use FreshPHP\Config\ConfigFileHandler;
 use FreshPHP\Config\LocaleTransfer;
 use FreshPHP\HTTP\Request;
 use FreshPHP\MVC\MVCRouter;
-use FreshPHP\MVC\Exception\NoIndexRouteException;
-use FreshPHP\MVC\Exception\UndefinedControllerException;
 use FreshPHP\MVC\Controller\ErrorController;
 
 session_start();
@@ -15,8 +13,8 @@ ClassAutoloader::register() || die("Cannot register autoloader");
 error_reporting((Request::getVariable("debug")) ? E_ALL : 0);
 
 $lDir = (int) ConfigFileHandler::getInstance()->getParam("framework", "mvc", "locale_index");
-if ($lDir >= 0 && (Request::getDir($lDir) == "" || Request::getDir($lDir) == null)) {
-    Request::redirect(
+if ($lDir >= 0 && Request::getDir($lDir) == "") {
+    Request::redirect("/" .
         (Request::getSessionVar("locale", "%s", false))
             ? ConfigFileHandler::getInstance()->getParam("framework", "mvc", "default_locale")
             : Request::getSessionVar("locale")
@@ -38,6 +36,9 @@ try {
         case "NoIndexRouteException":
         case "UndefinedControllerException":
             $errorData["code"] = 404;
+            break;
+        case "InvalidControllerException":
+            $errorData["code"] = 500;
             break;
         case "Exception":
         default:
