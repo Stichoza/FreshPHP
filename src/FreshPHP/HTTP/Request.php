@@ -203,7 +203,7 @@ class Request extends Singleton {
      * @throws \OutOfBoundsException
      */
     public static function getDir($index = 0, $exceptions = false) {
-        if ($index > count(self::getDirArray()) || $index < 0) {
+        if ($index >= count(self::getDirArray()) || $index < 0) {
             if ($exceptions)
                 throw new \OutOfBoundsException("Array index out of bounds");
             return "";
