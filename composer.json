@@ -1,0 +1,19 @@
+{
+    "name": "Stichoza/FreshPHP",
+    "type": "framework",
+    "description": "Fresh PHP MVC framework",
+    "keywords": ["php","mvc", "framework"],
+    "homepage": "http://github.com/Stichoza/FreshPHP",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Levan Velijanashvili",
+            "email": "me@stichoza.com",
+            "homepage": "http://stichoza.com/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    }
+}
