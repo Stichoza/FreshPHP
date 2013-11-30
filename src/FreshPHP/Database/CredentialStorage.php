@@ -15,6 +15,6 @@ class CredentialStorage {
 
     const DB_PASS = "";
 
-    const DB_NAME = "db1";
+    const DB_NAME = "freshphp";
 
 } 
