@@ -79,7 +79,7 @@ class MVCRouter {
             case "%123abc%":
                 return !!preg_match('/^[a-zA-Z0-9]+$/', $dirName);
             case "%any%":
-                return !!preg_match('/^[a-zA-Z0-9]+$/', $dirName);
+                return !!preg_match('/^[A-Za-z0-9-_]+$/', $dirName);
             default:
                 if (substr_count($routeString, "/")) {
                     return !!preg_match($routeString, $dirName);
