@@ -65,4 +65,29 @@ class MVCRouter {
 
     }
 
+    /**
+     * @param string $dirName Directory name from HTTP requesy
+     * @param string $routeString Route dir matching string from mvc_route
+     * @return bool
+     */
+    public static final function matchRequestDir($dirName, $routeString) {
+        switch ($routeString) {
+            case "%123%":
+                return !!preg_match('/^[0-9]+$/', $dirName);
+            case "%abc%":
+                return !!preg_match('/^[a-zA-Z]+$/', $dirName);
+            case "%abc123%":
+            case "%123abc%":
+                return !!preg_match('/^[a-zA-Z0-9]+$/', $dirName);
+            case "%any%":
+                return !!preg_match('/^[a-zA-Z0-9]+$/', $dirName);
+            default:
+                if (substr_count($routeString, "/")) {
+                    return !!preg_match($routeString, $dirName);
+                } else {
+                    return ($routeString == $dirName);
+                }
+        }
+    }
+
 } 
