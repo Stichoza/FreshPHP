@@ -32,28 +32,27 @@ class MVCRouter {
         $routePath = $mvc["route"];
         $controllerClassName = null;
 
-        // TODO think again about this crazy shit
-        for ($i = intval($mvc["start_index"]); $i <= count($requestArray); $i++) {
-            if ($i == $mvc["start_index"]
-                && !isset($requestArray[$i])) {
-                $controllerClassName = $routePath["."];
-                break;
-            } else if (!isset($routePath[$requestArray[$i]])) {
-                throw new UndefinedControllerException("Controller for this request is not defined");
-            } else if (!isset($requestArray[$i+1])
-                || empty($requestArray[$i+1])) {
-                if (!is_array($routePath[$requestArray[$i]])
-                    && !empty($routePath[$requestArray[$i]])) {
-                    $controllerClassName = $routePath[$requestArray[$i]];
-                } else if (isset($routePath[$requestArray[$i]]["."])) {
-                    $controllerClassName = $routePath[$requestArray[$i]]["."];
-                } else {
-                    throw new NoIndexRouteException("Route has no index controller defined");
+        if (!isset($requestArray[intval($mvc["start_index"])])) {
+            $controllerClassName = $routePath["."];
+        } else {
+            for ($i = intval($mvc["start_index"]); $i < count($requestArray)+1; $i++) {
+                if (!$routePath = self::getRequestChild($requestArray[$i], $routePath)) {
+                    throw new UndefinedControllerException("Controller for this request is not defined");
                 }
-                break;
-            } else {
-                $routePath = $routePath[$requestArray[$i]];
+                if (is_string($routePath)) {
+                    $controllerClassName = $routePath;
+                    break;
+                }
+                if (!isset($requestArray[$i+1])) {
+                    if (isset($routePath["."])) {
+                        $controllerClassName = $routePath["."];
+                        break;
+                    } else {
+                        throw new NoIndexRouteException("Route has no index controller defined");
+                    }
+                }
             }
+
         }
 
         $controllerReflection = new \ReflectionClass(__NAMESPACE__ . "\\Controller\\" . $controllerClassName);
@@ -88,6 +87,20 @@ class MVCRouter {
                     return ($routeString == $dirName);
                 }
         }
+    }
+
+    /**
+     * @param string $dirName
+     * @param array $routeArray
+     * @return bool
+     */
+    public static final function getRouteChild($dirName, array $routeArray) {
+        foreach ($routeArray as $key => $value) {
+            if (self::matchRequestDir($dirName, $key)) {
+                return $value;
+            }
+        }
+        return false;
     }
 
 } 
