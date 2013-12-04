@@ -15,7 +15,7 @@ error_reporting((Request::getVariable("debug")) ? E_ALL : 0);
 $lDir = (int) ConfigFileHandler::getInstance()->getParam("framework", "mvc", "locale_index");
 if ($lDir >= 0 && Request::getDir($lDir) == "") {
     Request::redirect("/" .
-        (Request::getSessionVar("locale", "%s", false))
+        (!Request::getSessionVar("locale", "%s", false))
             ? ConfigFileHandler::getInstance()->getParam("framework", "mvc", "default_locale")
             : Request::getSessionVar("locale")
     );
@@ -27,6 +27,7 @@ try {
             (int) ConfigFileHandler::getInstance()->getParam("framework", "mvc", "locale_index")
         )
     );
+    Request::setSessionVar("locale", LocaleTransfer::getLocale());
     MVCRouter::getController()->main();
 } catch (Exception $e) {
     $errorController = new ErrorController();
