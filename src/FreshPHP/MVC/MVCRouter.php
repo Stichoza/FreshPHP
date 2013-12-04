@@ -36,7 +36,7 @@ class MVCRouter {
             $controllerClassName = $routePath["."];
         } else {
             for ($i = intval($mvc["start_index"]); $i < count($requestArray)+1; $i++) {
-                if (!$routePath = self::getRequestChild($requestArray[$i], $routePath)) {
+                if (!$routePath = self::getRouteChild($requestArray[$i], $routePath)) {
                     throw new UndefinedControllerException("Controller for this request is not defined");
                 }
                 if (is_string($routePath)) {
@@ -103,4 +103,4 @@ class MVCRouter {
         return false;
     }
 
-} 
+}
