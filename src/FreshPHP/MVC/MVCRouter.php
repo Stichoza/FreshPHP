@@ -65,7 +65,7 @@ class MVCRouter {
     }
 
     /**
-     * @param string $dirName Directory name from HTTP requesy
+     * @param string $dirName Directory name from HTTP request
      * @param string $routeString Route dir matching string from mvc_route
      * @return bool
      */
