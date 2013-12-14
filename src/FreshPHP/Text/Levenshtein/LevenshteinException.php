@@ -1,9 +1,9 @@
 <?php
 
-namespace FreshPHP\Text;
+namespace FreshPHP\Text\Levenshtein;
 
 /**
- * Class LevenshteinException
+ * Class LevenshteinException\Levenshtein
  * @package FreshPHP\Text
  * @author Stichoza <me@stichoza.com>
  */

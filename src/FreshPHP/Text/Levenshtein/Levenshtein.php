@@ -1,6 +1,6 @@
 <?php
 
-namespace FreshPHP\Text;
+namespace FreshPHP\Text\Levenshtein;
 
 /**
  * Class Levenshtein
