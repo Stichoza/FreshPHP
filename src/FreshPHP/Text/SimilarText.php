@@ -1,6 +1,7 @@
 <?php
 
 namespace FreshPHP\Text;
+use FreshPHP\Text\Levenshtein\Levenshtein;
 
 /**
  * Class SimilarText
@@ -67,9 +68,14 @@ class SimilarText {
         }
 
         // Create associative array of similarities
+        $levenshtein = new Levenshtein();
         for ($i = 0; $i < count($this->base); $i++) {
-            $indexedResults[$this->base[$i]] = levenshtein($string, $this->base[$i]);
+            $indexedResults[$this->base[$i]] = $levenshtein
+                ->setString1($string)
+                ->setString2($this->base[$i])
+                ->getDistance();
         }
+        unset($levenshtein);
 
         // Sort (more similar first)
         asort($indexedResults);
