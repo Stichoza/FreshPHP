@@ -19,6 +19,7 @@ class SimilarText {
      * @throws \InvalidArgumentException
      */
     public function __construct($base = array()) {
+        $this->base = array();
         if (!is_array($base)) {
             throw new \InvalidArgumentException("Not an array");
         }
@@ -73,11 +74,13 @@ class SimilarText {
         // Sort (more similar first)
         asort($indexedResults);
 
-        for ($i = 0; $i < count($indexedResults); $i++) {
-            if ($limit > 0 && $i > $limit) {
+        $_i = 0;
+        foreach ($indexedResults as $word => $diffInt) {
+            if ($limit > 0 && $_i >= $limit) {
                 break;
             }
-            $finalResults[] = $indexedResults[$i];
+            $finalResults[] = $word; //$indexedResults[$_i++];
+            $_i++;
         }
 
         return $finalResults;
