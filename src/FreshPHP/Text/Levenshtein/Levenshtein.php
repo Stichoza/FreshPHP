@@ -146,8 +146,23 @@ class Levenshtein {
         return $this->costRep;
     }
 
-    public function getDistance() {
-
+    /**
+     * @param boolean $exceptions Throw exceptions
+     * @throws LevenshteinException
+     * @return int The Levenshtein-Distance between the two strings
+     */
+    public function getDistance($exceptions = false) {
+        $distance = levenshtein(
+            $this->getString1(),
+            $this->getString2(),
+            $this->getCostIns(),
+            $this->getCostRep(),
+            $this->getCostDel()
+        );
+        if ($distance < 0 && $exceptions) {
+            throw new LevenshteinException("Levenstein function failed");
+        }
+        return $distance;
     }
 
 } 
