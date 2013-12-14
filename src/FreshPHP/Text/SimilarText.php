@@ -32,9 +32,9 @@ class SimilarText {
      */
     public function addToBase($add) {
         if (is_array($add)) {
-            foreach ($add as $key => $value) {
-                if (!is_array($value) && !in_array($value, $this->base)) {
-                    $this->base[] = $value;
+            foreach ($add as $a) {
+                if (!is_array($a) && !in_array($a, $this->base)) {
+                    $this->base[] = $a;
                 }
             }
         } else {
